@@ -1,0 +1,31 @@
+.button {
+  position: absolute;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+
+  @apply bg-accent-green;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  left: 50%;
+  transform: translate(-50%);
+
+  &:hover {
+    background-color: darken(#11f4d1, 10);
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 50%;
+
+  &.top {
+    transform: translate(-50%, -50%);
+  }
+
+  &.bottom {
+    transform: translate(-50%, -50%) rotateZ(180deg);
+  }
+}

@@ -1,0 +1,61 @@
+.nav {
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 350px;
+}
+
+.button {
+  @apply text-accent-green;
+  position: relative;
+  background: rgba(34, 48, 77, 0.3);
+  border: 1.5px solid #11f4d1;
+  border-radius: 20px;
+  height: 40px;
+  padding: 0 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  font-size: 12px;
+  line-height: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  transform: rotateZ(-90deg);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 50px;
+    background-image: url('../../assets/images/arrow.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &.top {
+    padding-right: 65px;
+
+    &::before {
+      right: 25px;
+      transform: translate(0, -50%) rotateZ(90deg);
+    }
+  }
+
+  &.bottom {
+    padding-left: 65px;
+
+    &::before {
+      left: 25px;
+      transform: translate(0, -50%) rotateZ(-90deg);
+    }
+  }
+
+  &:hover {
+    @apply bg-accent-green/20
+  }
+}

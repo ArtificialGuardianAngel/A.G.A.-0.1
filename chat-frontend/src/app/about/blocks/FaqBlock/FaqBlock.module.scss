@@ -1,0 +1,39 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(150.31% 94.37% at 60.52% 17.97%,
+      rgba(191, 60, 189, 0.2) 0%,
+      rgba(29, 42, 161, 0.2) 46.88%,
+      rgba(28, 41, 60, 0.2) 100%),
+    #1c293c;
+  z-index: 1000;
+  padding: 20px;
+  overflow: auto;
+}
+
+.title {
+  font-weight: bold;
+  @apply text-accent-green;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    padding: 15px 0 25px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 840px;
+  margin: auto;
+  padding: 0 20px;
+}

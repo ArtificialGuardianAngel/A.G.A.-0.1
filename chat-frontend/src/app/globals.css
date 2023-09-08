@@ -1,0 +1,71 @@
+@import '../assets/styles/styles.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Cera Pro';
+    src: url('/fonts/CeraPro-Light.woff2');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Cera Pro';
+    src: url('/fonts/CeraPro-Regular.woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Cera Pro';
+    src: url('/fonts/CeraPro-Medium.woff2');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Cera Pro';
+    src: url('/fonts/CeraPro-Bold.woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Cera Pro';
+    src: url('/fonts/CeraPro-Black.woff2');
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  html {
+    font-family: 'Cera Pro', sans-serif;
+    color: #ffffff;
+  }
+}
+
+.linear-rect {
+  width: 10px;
+  height: 50px;
+  background: linear-gradient(180deg, #7c1dce 0%, #11f4d1 100%);
+  border-radius: 100px;
+}
+
+
+.powered-by-nuah {
+  width: 10px;
+  height: 50px;
+  background: linear-gradient(180deg, #7c1dce 0%, #11f4d1 100%);
+  border-radius: 100px;
+}
+
+.wrapper-background {
+  background: radial-gradient(150.31% 94.37% at 60.52% 17.97%,
+      rgba(191, 60, 189, 0.2) 0%,
+      rgba(29, 42, 161, 0.2) 46.88%,
+      rgba(28, 41, 60, 0.2) 100%),
+    #1c293c;
+  opacity: 0.8;
+}

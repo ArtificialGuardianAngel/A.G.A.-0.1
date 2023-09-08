@@ -1,0 +1,36 @@
+:root {
+    --font-family-cera-pro: 'Cera Pro', sans-serif;
+    --font-family-poppins: 'Poppins', sans-serif;
+    --white: #ffffff;
+    --blue-2: #263146;
+    --blue-3: #3d4b72;
+    --blue-6: #4c5576;
+    --accent-green: #11f4d1;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-size: 28px;
+    color: var(--white);
+    font-family: var(--font-family-cera-pro);
+}
+
+
+.faq-page-enter {
+    transform: translate(100%, 0);
+}
+
+.faq-page-enter-active {
+    transform: translate(0, 0);
+    transition: transform 0.3s;
+}
+
+.faq-page-exit {
+    transform: translate(0, 0);
+}
+
+.faq-page-exit-active {
+    transform: translate(100%, 0);
+    transition: transform 0.3s;
+}

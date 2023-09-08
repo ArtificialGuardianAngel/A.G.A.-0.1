@@ -1,0 +1,63 @@
+variables:
+  PROJECT_PATH: "/home/gitlab-runner/projects/aga.live_backend"
+  DEPLOY_PATH: "/home/gitlab-runner/deployments/aga.live_backend"
+  BACKUP_PATH: "/home/gitlab-runner/backups/aga.live_backend"
+  NGINX_CONF: "./nginx.conf"
+
+stages:
+  - install
+  - test
+  - deploy
+  - rollback
+
+install:
+  stage: install
+  script:
+    - cp -r ./* $PROJECT_PATH
+    - cd $PROJECT_PATH
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+test:
+  stage: test
+  script:
+    - cd $PROJECT_PATH
+    - npm test
+
+deploy:
+  stage: deploy
+  script:
+    - cd $PROJECT_PATH
+    - sudo cp $NGINX_CONF /etc/nginx/sites-available/api.aga.live
+    - echo MONGODB_URI=$MONGODB_URI >> .env
+    - echo RMQ_HOST=$RMQ_HOST >> .env
+    - echo MINING_COINS_PER_QUERY=$MINING_COINS_PER_QUERY >> .env
+    - echo MINING_COINS_MAX_PER_DAY=$MINING_COINS_MAX_PER_DAY >> .env
+    - echo JWT_SECRET_PASSWORD=$JWT_SECRET_PASSWORD >> .env
+    - echo SLACK_API_KEY=$SLACK_API_KEY >> .env
+    - cat .env
+    - if [ -d $DEPLOY_PATH ]; then sudo mkdir $BACKUP_PATH/$CI_COMMIT_SHORT_SHA && sudo mv $DEPLOY_PATH $BACKUP_PATH/$CI_COMMIT_SHORT_SHA; fi
+    - sudo rsync -av --progress . $DEPLOY_PATH --exclude deploy
+    - npm run build
+    - pm2 start ecosystem.config.js
+    - pm2 save
+  environment:
+    name: production
+  only:
+    - main
+
+rollback:
+  stage: rollback
+  script:
+    - cd $PROJECT_PATH
+    - LAST_DEPLOY=$(ls -td -- $BACKUP_PATH/* | head -n 1)
+    - sudo rm -rf $DEPLOY_PATH
+    - sudo mkdir $DEPLOY_PATH
+    - sudo mv $LAST_DEPLOY $DEPLOY_PATH
+    - pm2 start ecosystem.config.js
+    - pm2 save
+  when: manual
+  environment:
+    name: production

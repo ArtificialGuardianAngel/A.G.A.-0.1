@@ -1,0 +1,58 @@
+.wrapper {
+  max-width: 910px;
+  padding: 20px;
+
+  &> :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 700;
+  @apply text-white;
+  letter-spacing: 0.1em;
+  margin-bottom: 60px;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.paragraphs {
+  margin-bottom: 60px;
+
+  p {
+    text-align: center;
+    font-size: 28px;
+    line-height: calc(29 / 28);
+    font-weight: 300;
+    @apply text-white;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+
+      @media (max-width: 1024px) {
+        margin-bottom: 15px;
+      }
+    }
+
+    span {
+      @apply text-accent-green;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

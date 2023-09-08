@@ -1,0 +1,12 @@
+# A.G.A. Chat Backend
+
+
+.env
+```
+MONGODB_URI=
+RMQ_HOST="amqp://35.205.118.71"
+
+MINING_COINS_PER_QUERY=0.01
+MINING_COINS_MAX_PER_DAY=0.1
+JWT_SECRET_PASSWORD="secrect-phrase"
+```

@@ -1,0 +1,42 @@
+.wrapper {
+  max-width: 910px;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+.title {
+  font-size: 28px;
+  line-height: 18px;
+  margin-bottom: 60px;
+  text-align: center;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+}
+
+.grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & > * {
+    width: calc(33.3% - 20px / 3);
+
+    @media (max-width: 1024px) {
+      width: calc(50% - 20px / 2);
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+variables:
+  PROJECT_PATH: "/home/gitlab-runner/projects/aga.live"
+  DEPLOY_PATH: "/home/gitlab-runner/deployments/aga.live"
+  BACKUP_PATH: "/home/gitlab-runner/backups/aga.live"
+  NGINX_CONF: "./nginx.conf"
+
+stages:
+  - install
+  - deploy
+  - rollback
+
+install:
+  stage: install
+  script:
+    - rm -rf $PROJECT_PATH/*
+    - cp -r ./* $PROJECT_PATH
+    - cd $PROJECT_PATH
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+deploy:
+  stage: deploy
+  script:
+    - cd $PROJECT_PATH
+    - sudo cp $NGINX_CONF /etc/nginx/sites-available/aga.live
+    - echo NEXT_PUBLIC_API_URL=$NEXT_API_URL >> .env
+    - echo NEXT_PUBLIC_FACEBOOK_LINK=$NEXT_FACEBOOK_LINK >> .env
+    - echo NEXT_PUBLIC_LINKEDIN_LINK=$NEXT_LINKEDIN_LINK >> .env
+    - echo NEXT_PUBLIC_TWITTER_LINK=$NEXT_TWITTER_LINK >> .env
+    - echo NEXT_PUBLIC_WHATSAPP_LINK=$NEXT_WHATSAPP_LINK >> .env
+    - echo NEXT_PUBLIC_TELEGRAM_LINK=$NEXT_TELEGRAM_LINK >> .env
+    - cat .env
+    - if [ -d $DEPLOY_PATH ]; then sudo mkdir $BACKUP_PATH/$CI_COMMIT_SHORT_SHA && sudo mv $DEPLOY_PATH $BACKUP_PATH/$CI_COMMIT_SHORT_SHA; fi
+    - rm -rf $DEPLOY_PATH/*
+    - sudo rsync -av --progress . $DEPLOY_PATH --exclude deploy
+    - npm run build
+    - pm2 start ecosystem.config.js
+    - pm2 save
+  environment:
+    name: production
+  only:
+    - main
+
+rollback:
+  stage: rollback
+  script:
+    - cd $PROJECT_PATH
+    - LAST_DEPLOY=$(ls -td -- $BACKUP_PATH/* | head -n 1)
+    - sudo rm -rf $DEPLOY_PATH
+    - sudo mkdir $DEPLOY_PATH
+    - sudo mv $LAST_DEPLOY $DEPLOY_PATH
+    - pm2 start ecosystem.config.js
+    - pm2 save
+  when: manual
+  environment:
+    name: production
