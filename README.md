@@ -7,9 +7,10 @@ Unleash your coding potential at our training camp, honing your skills to constr
 [Go to our AI Science Developer Training Camp](https://aga.vision/training-camp)
 
 Your trailblazing journey begins here.
+---
 
 Education program – 3 pillars (1/3 each):
 
-Theory: immerse yourself in educational videos.
-Experimentation: bring theory to life with solo or group projects.
-Teaching: create and share teaching videos. As the saying goes, “To teach is to learn twice.”.
+1. Theory: immerse yourself in educational videos.
+2. Experimentation: bring theory to life with solo or group projects.
+3. Teaching: create and share teaching videos. As the saying goes, “To teach is to learn twice.”.
